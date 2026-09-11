@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Метал Мастер — Металлообработка и ЧПУ во Владивостоке</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070A10;
+            --bg-card: #0F1524;
+            --accent: #00E5FF;
+            --accent-hover: #00B2CC;
+            --text-main: #FFFFFF;
+            --text-muted: #64748B;
+            --border: #1E293B;
+            --grid-color: rgba(0, 229, 255, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(16px);
+            background: rgba(7, 10, 16, 0.85);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .header-contacts {
+            display: flex;
+            gap: 32px;
+            font-size: 14px;
+        }
+
+        .header-contacts a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .header-contacts a:hover {
+            color: var(--accent);
+        }
+
+        /* Главный экран исправление отступа */
+        .hero {
+            padding-top: 160px; 
+            padding-bottom: 100px;
+            padding-left: 24px;
+            padding-right: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 20%, right: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 229, 255, 0.06);
+            border: 1px solid rgba(0, 229, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 4px;
+            color: var(--accent);
+            font-size: 12px;
+            width: fit-content;
+            margin-bottom: 32px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        h1 {
+            font-size: 54px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            max-width: 900px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #94A3B8;
+            max-width: 640px;
+            margin-bottom: 48px;
+        }
+
+        .btn {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 20px 40px;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            width: fit-content;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 30px rgba(0, 229, 255, 0.2);
+        }
+
+        .btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 35px rgba(0, 229, 255, 0.35);
+        }
+
+        section {
+            padding: 120px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 60px;
+            position: relative;
+            padding-left: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            bottom: 4px;
+            width: 4px;
+            background: var(--accent);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .service-num {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            color: rgba(0, 229, 255, 0.05);
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            padding-right: 40px;
+        }
+
+        .service-card p {
+            color: #94A3B8;
+            font-size: 15px;
+        }
+
+        .steps-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 40px 30px;
+            border-radius: 4px;
+        }
+
+        .step-item {
+            position: relative;
+        }
+
+        .step-num {
+            color: var(--accent);
+            font-size: 13px;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .step-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: #E2E8F0;
+        }
+
+        .form-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 60px 40px;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 36px; }
+            .header-contacts { display: none; }
+            .form-section { padding: 40px 20px; }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .form-group.full-width { grid-column: span 1; }
+        }
+
+        label {
+            font-size: 13px;
+            color: #94A3B8;
+        }
+
+        input, textarea {
+            background: #070A10;
+            border: 1px solid var(--border);
+            padding: 16px;
+            color: #fff;
+            font-family: inherit;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.2s;
+            font-size: 15px;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .upload-zone {
+            border: 2px dashed var(--border);
+            padding: 36px;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(7, 10, 16, 0.4);
+        }
+
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--accent);
+            background: rgba(0, 229, 255, 0.01);
+        }
+
+        .file-list {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #070A10;
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            border: 1px solid var(--border);
+        }
+
+        .file-remove {
+            color: #EF4444;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            font-size: 13px;
+            color: #94A3B8;
+            cursor: pointer;
+            margin-top: 24px;
