@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Металлообработка во Владивостоке. Отправьте чертёж на расчёт.">
+  <title>Токарка МКС — расчёт по чертежу</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <div class="brand">Токарка МКС</div>
+        <div class="subtitle">Металлообработка во Владивостоке</div>
+      </div>
+      <a class="phone" href="tel:+79960866722">+7 996 086-67-22</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">РАСЧЁТ ПО ЧЕРТЕЖУ</p>
+        <h1>Отправьте чертёж — подготовим расчёт</h1>
+        <p class="lead">
+          Заполните контакты и приложите чертежи или техническое задание.
+          Заявка и чертежи будут одновременно отправлены в рабочий Telegram, MAX и на электронную почту.
+        </p>
+      </div>
+
+      <div class="hero-visual">
+        <img src="./images/production-collage.png" alt="Современное производство: станки ЧПУ, лазерная резка и точная металлообработка" loading="eager">
+        <div class="visual-caption"><span>01</span> Современное оборудование · точная обработка металла</div>
+      </div>
+
+      <div class="card">
+        <form id="requestForm" novalidate>
+          <label>
+            Имя *
+            <input name="name" type="text" autocomplete="name" maxlength="100" required>
+          </label>
+
+          <label>
+            Телефон *
+            <input name="phone" type="tel" autocomplete="tel" maxlength="30"
+                   placeholder="+7 900 000-00-00" required>
+          </label>
+
+          <label>
+            E-mail
+            <input name="email" type="email" autocomplete="email" maxlength="160"
+                   placeholder="name@example.ru">
+          </label>
+
+          <label>
+            Что необходимо изготовить?
+            <textarea name="comment" rows="5" maxlength="3000"
+                      placeholder="Количество деталей, материал, сроки, дополнительные требования..."></textarea>
+          </label>
+
+<label class="file-box">
+            <span>Чертежи и документы *</span>
+            <input id="files" name="files" type="file" multiple
+                   accept=".pdf,.dwg,.dxf,.step,.stp,.stl,.jpg,.jpeg,.png,.zip,.doc,.docx,.xls,.xlsx">
+            <small>До 5 файлов, до 25 МБ каждый. PDF, DWG, DXF, STEP/STP, STL, JPG, PNG, ZIP и документы.</small>
+          </label>
+
+          <!-- Honeypot: обычному посетителю поле не видно -->
+          <div class="hp" aria-hidden="true">
+            <label>Компания<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <label class="consent">
+            <input name="consent" type="checkbox" required>
+            <span>Согласен на обработку указанных контактных данных для обработки заявки.</span>
+          </label>
+
+          <button id="submitBtn" type="submit">Отправить чертёж на расчёт</button>
+
+          <div id="status" class="status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      Токарка МКС · Владивосток
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
